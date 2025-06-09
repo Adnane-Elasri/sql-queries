@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation</title>
+</head>
+<body>
+    <h1>Table étudiants</h1>
+    <h2>Création de la table</h2>
+    <pre>
+CREATE TABLE etudiants (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    age INT,
+    niveau VARCHAR(10)
+);
+    </pre>
+
+    <h2>Insertion des données</h2>
+    <pre>
+INSERT INTO etudiants (name, age, niveau)
+VALUES
+('Sara', 18, 'Terminale'),
+('Yassine', 17, 'Première'),
+('Amine', 16, 'Seconde');
+    </pre>
+
+    <h2>Affichage des données</h2>
+    <pre>
+SELECT * FROM etudiants;
+    </pre>
+</body>
+</html>
