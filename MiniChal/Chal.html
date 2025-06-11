@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        -- Create tables
+        
+        CREATE TABLE classes (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          nom VARCHAR(50) NOT NULL
+        );
+        
+        CREATE TABLE eleves (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          nom VARCHAR(50),
+          prenom VARCHAR(50),
+          id_classe INT,
+          FOREIGN KEY (id_classe) REFERENCES classes(id)
+        );
+        
+        CREATE TABLE cartes_etudiantes (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          numero VARCHAR(100) NOT NULL,
+          id_eleve INT UNIQUE,
+          FOREIGN KEY (id_eleve) REFERENCES eleves(id)
+        );
+        
+        -- Insert classes
+
+        INSERT INTO classes (nom) VALUES 
+          ('1ère année'), 
+          ('2ème année');
+        
+        -- Insert students
+
+        INSERT INTO eleves (nom, prenom, id_classe) VALUES 
+          ('Smith', 'Sara', 1),
+          ('Johnson', 'Omar', 2),
+          ('Lee', 'Emma', 1);
+        
+        -- Insert student cards
+
+        INSERT INTO cartes_etudiantes (numero, id_eleve) VALUES 
+          ('CARD001', 1),
+          ('CARD002', 2),
+          ('CARD003', 3);
+        
+        -- Query: List all students with class and card number
+
+        SELECT 
+          e.id,
+          e.nom,
+          e.prenom,
+          c.nom AS classe,
+          ce.numero AS carte_numero
+        FROM eleves e
+        JOIN classes c ON e.id_classe = c.id
+        JOIN cartes_etudiantes ce ON ce.id_eleve = e.id;
+        
+        -- Test: Try to insert a second card for same student (should fail)
+        
+        INSERT INTO cartes_etudiantes (numero, id_eleve) VALUES 
+          ('CARD_DUPLICATE', 1);
+    </div>
+</body>
+</html>
