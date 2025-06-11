@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+                // Use or create the 'school' database
+                
+        use school
+
+                // Insert multiple student documents
+
+        db.students.insertMany([
+        {
+            lastName: "Smith",
+            firstName: "Sara",
+            email: "sara@email.com",
+            class: "Grade 1",
+            status: "active"
+        },
+        {
+            lastName: "Johnson",
+            firstName: "Omar",
+            email: "omar@email.com",
+            class: "Grade 2",
+            status: "active"
+        }
+        ])
+
+                // Find all students
+
+        db.students.find()
+
+                 // Find students in Grade 1
+
+        db.students.find({ class: "Grade 1" })
+
+                // Update Sara's status to inactive
+
+        db.students.updateOne(
+        { email: "sara@email.com" },
+        { $set: { status: "inactive" } }
+        )
+
+                // Delete Omar's record
+
+        db.students.deleteOne({ email: "omar@email.com" })
+
+                // Add a 'grades' field to Sara
+
+        db.students.updateOne(
+        { email: "sara@email.com" },
+        { $set: { grades: [85, 90, 88] } }
+        )
+
+                // Add a new grade to Sara's grades array
+
+        db.students.updateOne(
+        { email: "sara@email.com" },
+        { $push: { grades: 92 } }
+        )
+
+                // Find active students and sort them by last name
+
+        db.students.find({ status: "active" }).sort({ lastName: 1 })
+
+    </div>
+</body>
+</html>
